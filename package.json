@@ -6,7 +6,7 @@
   "private": "true",
   "repository": {
     "type": "git",
-    "url": "ssh://git@git.dev.d2l:7999/val/vui-helpers.git"
+    "url": "ssh://git@git.dev.d2l:7999/val/helpers.git"
   },
   "devDependencies": {
     "gulp": "^3.8.8",
