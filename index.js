@@ -1,3 +1,5 @@
+'use strict';
+
 var vfs = require( 'vinyl-fs' );
 
 var clean = function( target ) {
