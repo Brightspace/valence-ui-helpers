@@ -2,6 +2,8 @@
 
 var vfs = require( 'vinyl-fs' );
 
+var prefixBrowsers = 'last 4 Chrome versions, last 4 Firefox versions, Firefox ESR, IE >= 9, Safari >= 5.1, last 4 Opera versions';
+
 var clean = function( target ) {
 
 	var clean = require( 'gulp-rimraf' );
@@ -20,7 +22,7 @@ var makeCss = function( source, target, opts ) {
 
 	return vfs.src( source )
 		.pipe( less() )
-		.pipe( autoprefixer( ( opts && opts.autoprefixerOpts ) ? opts.autoprefixerOpts : 'none' ).postcss )
+		.pipe( autoprefixer( ( opts && opts.autoprefixerOpts ) ? opts.autoprefixerOpts : prefixBrowsers ).postcss )
 		.pipe( csslint( ( opts && opts.lintOpts ) ? opts.lintOpts : '' ) )
 		.pipe( csslint.reporter() )
 		.pipe( vfs.dest( target ) );
