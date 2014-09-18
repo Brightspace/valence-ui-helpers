@@ -44,6 +44,7 @@ var test = function( config, js, css ) {
 		.pipe( karma( { 
 			configFile: config, 
 			files: [ 
+				'node_modules/vui-helpers/jasmine/matchers.js',
 				js, 
 				{ pattern: css, included: true }
 			],
