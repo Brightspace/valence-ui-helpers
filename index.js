@@ -14,10 +14,13 @@ var clean = function( target ) {
 var makeCss = function( source, target, opts ) {
 
 	var csslint = require( 'gulp-csslint' ),
-		less = require( 'gulp-less' );
+		less = require( 'gulp-less' ),
+		autoprefixer = ( 'autoprefixer' ),
+		postcss = ( 'gulp-postcss' );
 
 	return vfs.src( source )
 		.pipe( less() )
+		.pipe( autoprefixer( ( opts && opts.autoprefixerOpts ) ? opts.autoprefixerOpts : 'none' ).postcss )
 		.pipe( csslint( ( opts && opts.lintOpts ) ? opts.lintOpts : '' ) )
 		.pipe( csslint.reporter() )
 		.pipe( vfs.dest( target ) );
