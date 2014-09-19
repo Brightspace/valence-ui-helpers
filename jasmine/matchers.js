@@ -2,6 +2,28 @@ var d2l = {
 
 	jasmine: {
 
+		_private: {
+
+			compareStyle: function( node, property, expected ) {
+
+				if ( !node ) {
+					return { pass: false, message: 'The node value is not defined.' };
+				}
+				if ( !expected ) {
+					return { pass: false, message: 'The expected value is not defined.' };
+				}
+
+				var val = window.getComputedStyle( node, null ).getPropertyValue( property );
+				if ( val === expected ) {
+					return { pass: true };
+				} else {
+					return { pass: false, message: 'Expected to find ' + expected + ' but found ' + val + '.' };
+				}
+
+			}
+
+		},
+
 		matchers: {
 
 			toHaveCssSelector: function() {
@@ -9,9 +31,8 @@ var d2l = {
 					compare: function( doc, expected ) {
 
 						if ( !doc ) {
-							return { pass: false, message: 'The actual document is not defined.' };
+							return { pass: false, message: 'The document value is not defined.' };
 						}
-
 						if ( !expected ) {
 							return { pass: false, message: 'The expected value is not defined.' };
 						}
@@ -29,6 +50,36 @@ var d2l = {
 
 						return { pass: false, message: 'Expected to find ' + expected + ' css selector but did not.' };
 
+					}
+				};
+			},
+
+			toHaveFontWeight: function() {
+				return {
+					compare: function( node, expected ) {
+						return d2l.jasmine._private.compareStyle(
+								node, 'font-weight', expected
+							);
+					}
+				};
+			},
+
+			toHaveRgbColor: function() {
+				return {
+					compare: function( node, expected ) {
+						return d2l.jasmine._private.compareStyle(
+								node, 'color', expected
+							);
+					}
+				};
+			},
+
+			toHaveTextDecoration: function() {
+				return {
+					compare: function( node, expected ) {
+						return d2l.jasmine._private.compareStyle(
+								node, 'text-decoration', expected
+							);
 					}
 				};
 			}
