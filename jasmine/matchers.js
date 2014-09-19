@@ -54,21 +54,21 @@ var d2l = {
 				};
 			},
 
-			toHaveFontWeight: function() {
+			toHaveColor: function() {
 				return {
 					compare: function( node, expected ) {
 						return d2l.jasmine._private.compareStyle(
-								node, 'font-weight', expected
+								node, 'color', expected
 							);
 					}
 				};
 			},
 
-			toHaveRgbColor: function() {
+			toHaveFontWeight: function() {
 				return {
 					compare: function( node, expected ) {
 						return d2l.jasmine._private.compareStyle(
-								node, 'color', expected
+								node, 'font-weight', expected
 							);
 					}
 				};
