@@ -1,22 +1,36 @@
-VUI Helpers
-===========
+#VUI Helpers
 
 This project contains GULP helper scripts for building VUI components.
 
-clean
------
+##Usage
+
+Install as a development dependency:
+
+```shell
+npm install --save-dev vui-helpers
+```
+
+Then add it to your `gulpfile.js`:
+
+```javascript
+var vuiHelpers = require('vui-helpers');
+```
+
+##API
+
+###clean
 
 Deletes directories or files.
 
-    var vuiHelpers = require('vui-helpers');
-    gulp.task( 'clean', function() {
-      return vuiHelpers.clean( [ 'dir1', 'dir2' ] );
-    } );
+```javascript
+gulp.task( 'clean', function() {
+  return vuiHelpers.clean( [ 'dir1', 'dir2' ] );
+} );
+```
 
 The only parameter is an array of directories/files to delete.
 
-makeCss
--------
+###makeCss
 
 Performs a [lint](https://www.npmjs.org/package/gulp-csslint) of the CSS files
 to validate syntax and CSS best practices, does a
@@ -24,39 +38,43 @@ to validate syntax and CSS best practices, does a
 and finally [auto-prefixes](https://www.npmjs.org/package/autoprefixer) the CSS
 to add vendor-specific prefixes based on our currently supported browsers.
 
-    var vuiHelpers = require('vui-helpers');
-    gulp.task( 'css', function() {
-      return vuiHelpers.makeCss( 'source/*', 'dist' );
-    } );
+```javascript
+var vuiHelpers = require('vui-helpers');
+gulp.task( 'css', function() {
+  return vuiHelpers.makeCss( 'source/*', 'dist' );
+} );
+```
 
 The first parameter is a glob which defines your CSS input files, followed by
 an output directory.
 
-makeLess
---------
+###makeLess
 
 Copies LESS files from source to target.
 
-    var vuiHelpers = require('vui-helpers');
-    gulp.task( 'less', function() {
-      return vui.makeLess( 'src/**/*.less', 'dist/' );
-    } );
+```javascript
+var vuiHelpers = require('vui-helpers');
+gulp.task( 'less', function() {
+  return vui.makeLess( 'src/**/*.less', 'dist/' );
+} );
+```
 
 The first parameter is a glob which defines the LESS input files, followed by
 an output location.
 
-test
-----
+###test
 
 Helper for testing with [Karma](https://www.npmjs.org/package/gulp-karma).
 
-    gulp.task( 'test', function () {
-      return vui.test(
-        'test/unit/karma.conf.js',
-        'test/unit/**/*Spec.js',
-        'dist/**/*.css'
-      );
-    } );
+```javascript
+gulp.task( 'test', function () {
+  return vui.test(
+    'test/unit/karma.conf.js',
+    'test/unit/**/*Spec.js',
+    'dist/**/*.css'
+  );
+} );
+```
 
 The first parameter is the location of a karma configuration file, followed by
 a glob which defines your test specs. The last parameter is a glob for any
