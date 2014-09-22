@@ -20,9 +20,7 @@ var d2l = {
 					return { pass: false, message: 'Expected to find ' + expected + ' but found ' + val + '.' };
 				}
 
-			}
-
-		},
+			},
 
 		matchers: {
 
@@ -80,6 +78,29 @@ var d2l = {
 						return d2l.jasmine._private.compareStyle(
 								node, 'text-decoration', expected
 							);
+					}
+				};
+			},
+
+			toBeOnBrowser: function( ) {
+				return {
+					compare: function( actual, browserExpected ) {
+						var userAgent = navigator.userAgent;
+						var expected;
+
+						if(userAgent.indexOf("Chrome") > -1) {
+						    expected = browserExpected.Chrome;
+						} else if (userAgent.indexOf("Safari") > -1) {
+						    expected = browserExpected.Safari;
+						} else if (userAgent.indexOf("Opera") > -1) {
+						    expected = browserExpected.Opera;
+						} else if (userAgent.indexOf("Firefox") > -1) {
+						    expected = browserExpected.Firefox;
+						} else if (userAgent.indexOf("MSIE") > -1) {
+						    expected = browserExpected.MSIE;
+						}
+
+						return { pass: actual == (expected || browserExpected.default), message: 'Expected ' + actual + ' to be ' + (expected || browserExpected.default) }
 					}
 				};
 			}
