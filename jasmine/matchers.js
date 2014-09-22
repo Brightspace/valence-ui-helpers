@@ -15,9 +15,6 @@ var d2l = {
 							return { pass: false, message: 'The expected value is not defined.' };
 						}
 
-<<<<<<< HEAD
-			},
-=======
 						var val = window.getComputedStyle( node, null ).getPropertyValue( property );
 						if ( val === expected ) {
 							return { pass: true };
@@ -28,9 +25,7 @@ var d2l = {
 					}
 				};
 			}
-
 		},
->>>>>>> master
 
 		matchers: {
 
