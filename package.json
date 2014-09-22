@@ -1,9 +1,8 @@
 {
   "name": "vui-helpers",
   "description": "Gulp helper scripts for building VUI components",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "D2L Incorporated",
-  "private": "true",
   "repository": {
     "type": "git",
     "url": "ssh://git@git.dev.d2l:7999/val/helpers.git"
