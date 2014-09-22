@@ -1,6 +1,10 @@
+VUI Helpers
+===========
+
 This project contains GULP helper scripts for building VUI components.
 
-==clean==
+clean
+-----
 
 Deletes directories or files.
 
@@ -11,7 +15,8 @@ Deletes directories or files.
 
 The only parameter is an array of directories/files to delete.
 
-==makeCss==
+makeCss
+-------
 
 Performs a [lint](https://www.npmjs.org/package/gulp-csslint) of the CSS files
 to validate syntax and CSS best practices, does a
@@ -27,7 +32,8 @@ to add vendor-specific prefixes based on our currently supported browsers.
 The first parameter is a glob which defines your CSS input files, followed by
 an output directory.
 
-==makeLess==
+makeLess
+--------
 
 Copies LESS files from source to target.
 
@@ -39,7 +45,8 @@ Copies LESS files from source to target.
 The first parameter is a glob which defines the LESS input files, followed by
 an output location.
 
-==test==
+test
+----
 
 Helper for testing with [Karma](https://www.npmjs.org/package/gulp-karma).
 
