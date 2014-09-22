@@ -64,11 +64,41 @@ var d2l = {
 				};
 			},
 
+			toHaveFontFamily: function() {
+				return {
+					compare: function( node, expected ) {
+						return d2l.jasmine._private.compareStyle(
+								node, 'font-family', expected
+							);
+					}
+				};
+			},
+
+			toHaveFontSize: function() {
+				return {
+					compare: function( node, expected ) {
+						return d2l.jasmine._private.compareStyle(
+								node, 'font-size', expected
+							);
+					}
+				};
+			},
+
 			toHaveFontWeight: function() {
 				return {
 					compare: function( node, expected ) {
 						return d2l.jasmine._private.compareStyle(
 								node, 'font-weight', expected
+							);
+					}
+				};
+			},
+
+			toHaveLineHeight: function() {
+				return {
+					compare: function( node, expected ) {
+						return d2l.jasmine._private.compareStyle(
+								node, 'line-height', expected
 							);
 					}
 				};
