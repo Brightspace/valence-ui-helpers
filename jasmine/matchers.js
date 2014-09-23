@@ -81,6 +81,22 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'text-decoration' );
 			},
 
+			toHaveTopMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-top' );
+			},
+
+			toHaveBottomMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
+			},
+
+			toHaveLeftMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-left' );
+			},
+
+			toHaveRightMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-right' );
+			},
+
 			toBeOnBrowser: function( ) {
 				return {
 					compare: function( actual, browserExpected ) {
