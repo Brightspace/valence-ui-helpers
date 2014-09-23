@@ -6,12 +6,36 @@ var prefixOpts = {
 	browsers: ['last 4 Chrome versions', 'last 4 Firefox versions', 'Firefox ESR', 'IE >= 9', 'Safari >= 5.1', 'last 4 Opera versions' ] 
 };
 
-var clean = function( target ) {
+var clean = function( targets ) {
 
-	var clean = require( 'gulp-rimraf' );
+	var clean = require( 'rimraf' ),
+		q = require( 'q' );
 
-	return vfs.src( target )
-		.pipe( clean() );
+	var cleanThis = function( path ) {
+		var p = q.defer();
+
+		clean( path, function() {
+			p.resolve(path);
+		} );
+
+		return p.promise;
+	};
+
+	var cleanPromises = [];
+
+	if ( typeof targets === 'string' ) {
+
+		cleanPromises.push( cleanThis( targets ) );
+
+	} else if ( typeof targets === 'object' || targets.length !== undefined ) {
+
+		for( var i=0; i<targets.length; i++ ) {
+			cleanPromises.push( cleanThis( targets[i] ) );
+		}
+
+	}
+
+	return q.all( cleanPromises );
 
 };
 
