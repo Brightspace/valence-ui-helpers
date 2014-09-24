@@ -122,6 +122,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
 			},
 
+			toHaveColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'color' );
+			},
+
 			toHaveCssSelector: function() {
 				return {
 					compare: function( doc, expected ) {
@@ -148,10 +152,6 @@ var d2l = {
 
 					}
 				};
-			},
-
-			toHaveColor: function() {
-				return d2l.jasmine._private.createCompareStyle( 'color' );
 			},
 
 			toHaveDisplay: function() {
