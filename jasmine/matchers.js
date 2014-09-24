@@ -72,6 +72,10 @@ var d2l = {
 
 		matchers: {
 
+			toHaveAfterElementContent: function() {
+				return d2l.jasmine._private.createCompareStyle( 'content', ':after' );
+			},
+
 			toHaveAfterElementBase64Image: function() {
 				return {
 					compare: function( actual ) {
@@ -93,6 +97,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'background-color' );
 			},
 
+			toHaveBeforeElementContent: function() {
+				return d2l.jasmine._private.createCompareStyle( 'content', ':before' );
+			},
+
 			toHaveBeforeElementBase64Image: function() {
 				return {
 					compare: function( actual ) {
@@ -112,14 +120,6 @@ var d2l = {
 
 			toHaveBottomMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
-			},
-
-			toHaveContentAfter: function() {
-				return d2l.jasmine._private.createCompareStyle( 'content', ':after' );
-			},
-
-			toHaveContentBefore: function() {
-				return d2l.jasmine._private.createCompareStyle( 'content', ':before' );
 			},
 
 			toHaveCssSelector: function() {
