@@ -4,7 +4,48 @@ var d2l = {
 
 		_private: {
 
-			createCompareStyle: function( property ) {
+			createCompareBoxValues: function( property ) {
+
+				return {
+					compare: function( actual, expected ) {
+
+						var topResult = d2l.jasmine._private.createCompareStyle( property + '-top' ).compare( actual, expected );
+						if ( !topResult.pass ) {
+							return topResult;
+						}
+
+						var rightResult = d2l.jasmine._private.createCompareStyle( property + '-right' ).compare( actual, expected );
+						if ( !rightResult.pass ) {
+							return rightResult;
+						}
+
+						var bottomResult = d2l.jasmine._private.createCompareStyle( property + '-bottom' ).compare( actual, expected );
+						if ( !bottomResult.pass ) {
+							return bottomResult;
+						}
+
+						var leftResult = d2l.jasmine._private.createCompareStyle( property + '-left' ).compare( actual, expected );
+						if ( !leftResult.pass ) {
+							return leftResult;
+						}
+
+						return { pass: true };
+
+					}
+				};
+
+			},
+
+			createCompareStyle: function( property, pseudoElement, compareType ) {
+
+				if ( pseudoElement === undefined ) {
+					pseudoElement = null;
+				}
+
+				if ( compareType === undefined ) {
+					compareType = 'equals';
+				}
+
 				return {
 					compare: function( node, expected ) {
 
@@ -15,11 +56,13 @@ var d2l = {
 							return { pass: false, message: 'The expected value is not defined.' };
 						}
 
-						var val = window.getComputedStyle( node, null ).getPropertyValue( property );
-						if ( val === expected ) {
+						var val = window.getComputedStyle( node, pseudoElement ).getPropertyValue( property );
+						if ( compareType === 'equals' && val === expected ) {
+							return { pass: true };
+						} else if ( compareType === 'startsWith' && val.indexOf( expected ) !== -1 ) {
 							return { pass: true };
 						} else {
-							return { pass: false, message: 'Expected to find ' + expected + ' but found ' + val + '.' };
+							return { pass: false, message: 'Expected ' + property + ' to be ' + expected + ' but found ' + val + '.' };
 						}
 
 					}
@@ -28,6 +71,44 @@ var d2l = {
 		},
 
 		matchers: {
+
+			toHaveBase64ImageBefore: function() {
+				return {
+					compare: function( actual ) {
+						var compareObj = d2l.jasmine._private.createCompareStyle( 
+							'content', 
+							':before', 
+							'startsWith' 
+						);
+						return compareObj.compare( actual, 'url(data:image/png;base64,' );
+					}
+				};
+			},
+
+			toHaveBase64ImageAfter: function() {
+				return {
+					compare: function( actual ) {
+						var compareObj = d2l.jasmine._private.createCompareStyle( 
+							'content', 
+							':after', 
+							'startsWith' 
+						);
+						return compareObj.compare( actual, 'url(data:image/png;base64,' );
+					}
+				};
+			},
+
+			toHaveBottomMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
+			},
+
+			toHaveContentAfter: function() {
+				return d2l.jasmine._private.createCompareStyle( 'content', ':after' );
+			},
+
+			toHaveContentBefore: function() {
+				return d2l.jasmine._private.createCompareStyle( 'content', ':before' );
+			},
 
 			toHaveCssSelector: function() {
 				return {
@@ -61,6 +142,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'color' );
 			},
 
+			toHaveDisplay: function() {
+				return d2l.jasmine._private.createCompareStyle( 'display' );
+			},
+
 			toHaveFontFamily: function() {
 				return d2l.jasmine._private.createCompareStyle( 'font-family' );
 			},
@@ -73,8 +158,28 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'font-weight' );
 			},
 
+			toHaveHeight: function() {
+				return d2l.jasmine._private.createCompareStyle( 'height' );
+			},
+
+			toHaveLeftMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-left' );
+			},
+
 			toHaveLineHeight: function() {
 				return d2l.jasmine._private.createCompareStyle( 'line-height' );
+			},
+
+			toHaveMargin: function() {
+				return d2l.jasmine._private.createCompareBoxValues( 'margin' );
+			},
+
+			toHavePadding: function() {
+				return d2l.jasmine._private.createCompareBoxValues( 'padding' );
+			},
+
+			toHaveRightMargin: function() {
+				return d2l.jasmine._private.createCompareStyle( 'margin-right' );
 			},
 
 			toHaveTextDecoration: function() {
@@ -83,18 +188,6 @@ var d2l = {
 
 			toHaveTopMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-top' );
-			},
-
-			toHaveBottomMargin: function() {
-				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
-			},
-
-			toHaveLeftMargin: function() {
-				return d2l.jasmine._private.createCompareStyle( 'margin-left' );
-			},
-
-			toHaveRightMargin: function() {
-				return d2l.jasmine._private.createCompareStyle( 'margin-right' );
 			},
 
 			toBeOnBrowser: function( ) {
