@@ -72,7 +72,28 @@ var d2l = {
 
 		matchers: {
 
-			toHaveBase64ImageBefore: function() {
+			toHaveAfterElementBase64Image: function() {
+				return {
+					compare: function( actual ) {
+						var compareObj = d2l.jasmine._private.createCompareStyle( 
+							'content', 
+							':after', 
+							'startsWith' 
+						);
+						return compareObj.compare( actual, 'url(data:image/png;base64,' );
+					}
+				};
+			},
+
+			toHaveAfterElementDisplay: function() {
+				return d2l.jasmine._private.createCompareStyle( 'display', ':after' );
+			},
+
+			toHaveBackgroundColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'background-color' );
+			},
+
+			toHaveBeforeElementBase64Image: function() {
 				return {
 					compare: function( actual ) {
 						var compareObj = d2l.jasmine._private.createCompareStyle( 
@@ -85,17 +106,8 @@ var d2l = {
 				};
 			},
 
-			toHaveBase64ImageAfter: function() {
-				return {
-					compare: function( actual ) {
-						var compareObj = d2l.jasmine._private.createCompareStyle( 
-							'content', 
-							':after', 
-							'startsWith' 
-						);
-						return compareObj.compare( actual, 'url(data:image/png;base64,' );
-					}
-				};
+			toHaveBeforeElementDisplay: function() {
+				return d2l.jasmine._private.createCompareStyle( 'display', ':before' );
 			},
 
 			toHaveBottomMargin: function() {
@@ -168,6 +180,18 @@ var d2l = {
 
 			toHaveLineHeight: function() {
 				return d2l.jasmine._private.createCompareStyle( 'line-height' );
+			},
+
+			toHaveListStyleImage: function() {
+				return d2l.jasmine._private.createCompareStyle( 'list-style-image' );
+			},
+
+			toHaveListStylePosition: function() {
+				return d2l.jasmine._private.createCompareStyle( 'list-style-position' );
+			},
+
+			toHaveListStyleType: function() {
+				return d2l.jasmine._private.createCompareStyle( 'list-style-type' );
 			},
 
 			toHaveMargin: function() {
