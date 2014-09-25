@@ -267,19 +267,20 @@ var d2l = {
 								agentExpected
 							);
 
+						var osExpected;
 						if( userAgent.indexOf("Windows") > -1 ) {
-							expected = expected.Windows;
+							osExpected = expected.Windows;
 						} else if( userAgent.indexOf("Linux") > -1 ) {
-							expected = expected.Linux;
+							osExpected = expected.Linux;
 						}
 
-						if( expected === undefined ) {
-							expected = expected.default;
+						if( osExpected === undefined ) {
+							osExpected = expected.default;
 						}
 
 						return {
-							pass: actual === expected,
-							message: 'Expected ' + actual + ' to be ' + expected
+							pass: actual === osExpected,
+							message: 'Expected ' + actual + ' to be ' + osExpected
 						};
 
 					}
