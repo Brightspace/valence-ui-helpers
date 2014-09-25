@@ -6,36 +6,26 @@ var prefixOpts = {
 	browsers: ['last 4 Chrome versions', 'last 4 Firefox versions', 'Firefox ESR', 'IE >= 9', 'Safari >= 5.1', 'last 4 Opera versions' ] 
 };
 
-var clean = function( targets ) {
+var clean = function() {
 
-	var clean = require( 'rimraf' ),
-		q = require( 'q' );
+	var rm = require( 'rimraf' ),
+		through2 = require( 'through2' );
 
-	var cleanThis = function( path ) {
-		var p = q.defer();
+	var paths = [];
 
-		clean( path, function() {
-			p.resolve(path);
-		} );
-
-		return p.promise;
+	var inspectIt = function( file, enc, done ) {
+		paths.push( file.path );
+		done();
 	};
 
-	var cleanPromises = [];
-
-	if ( typeof targets === 'string' ) {
-
-		cleanPromises.push( cleanThis( targets ) );
-
-	} else if ( typeof targets === 'object' || targets.length !== undefined ) {
-
-		for( var i=0; i<targets.length; i++ ) {
-			cleanPromises.push( cleanThis( targets[i] ) );
+	var washIt = function( done ) {
+		for ( var i=0; i<paths.length; i++ ) {
+			rm.sync( paths[i] );
 		}
+		done();
+	};
 
-	}
-
-	return q.all( cleanPromises );
+	return through2.obj( inspectIt, washIt );
 
 };
 
