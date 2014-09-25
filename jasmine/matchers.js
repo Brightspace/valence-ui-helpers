@@ -67,7 +67,32 @@ var d2l = {
 
 					}
 				};
+			},
+
+			extractBrowser: function( userAgent, expected ) {
+
+				var result;
+
+				if( userAgent.indexOf("Chrome") > -1 ) {
+					result = expected.Chrome;
+				} else if( userAgent.indexOf("Safari") > -1 ) {
+					result = expected.Safari;
+				} else if( userAgent.indexOf("Opera") > -1 ) {
+					result = expected.Opera;
+				} else if( userAgent.indexOf("Firefox") > -1 ) {
+					result = expected.Firefox;
+				} else if( userAgent.indexOf("MSIE") > -1 ) {
+					result = expected.MSIE;
+				}
+
+				if( result === undefined ) {
+					result = expected.default;
+				}
+
+				return result;
+
 			}
+
 		},
 
 		matchers: {
@@ -217,25 +242,44 @@ var d2l = {
 			toBeOnBrowser: function( ) {
 				return {
 					compare: function( actual, browserExpected ) {
+						
+						var expected = d2l.jasmine._private.extractBrowser( 
+								navigator.userAgent,
+								browserExpected
+							);
 
+						return {
+								pass: actual == expected,
+								message: 'Expected ' + actual + ' to be ' + expected
+							};
+
+					}
+				};
+			},
+
+			toBeOnAgent: function() {
+				return {
+					compare: function( actual, agentExpected ) {
 						var userAgent = navigator.userAgent;
-						var expected;
 
-						if(userAgent.indexOf("Chrome") > -1) {
-							expected = browserExpected.Chrome;
-						} else if (userAgent.indexOf("Safari") > -1) {
-							expected = browserExpected.Safari;
-						} else if (userAgent.indexOf("Opera") > -1) {
-							expected = browserExpected.Opera;
-						} else if (userAgent.indexOf("Firefox") > -1) {
-							expected = browserExpected.Firefox;
-						} else if (userAgent.indexOf("MSIE") > -1) {
-							expected = browserExpected.MSIE;
+						var expected = d2l.jasmine._private.extractBrowser( 
+								userAgent,
+								agentExpected
+							);
+
+						if( userAgent.indexOf("Windows") > -1 ) {
+							expected = expected.Windows;
+						} else if( userAgent.indexOf("Linux") > -1 ) {
+							expected = expected.Linux;
 						}
 
-						return { 
-							pass: actual == (expected || browserExpected.default), 
-							message: 'Expected ' + actual + ' to be ' + (expected || browserExpected.default) 
+						if( expected === undefined ) {
+							expected = expected.default;
+						}
+
+						return {
+							pass: actual === expected,
+							message: 'Expected ' + actual + ' to be ' + expected
 						};
 
 					}
