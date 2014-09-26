@@ -3,7 +3,13 @@
 var vfs = require( 'vinyl-fs' );
 
 var prefixOpts = { 
-	browsers: ['last 4 Chrome versions', 'last 4 Firefox versions', 'Firefox ESR', 'IE >= 9', 'Safari >= 5.1', 'last 4 Opera versions' ] 
+	browsers: [ 
+		'last 4 Chrome versions', 
+		'last 4 Firefox versions', 
+		'Firefox ESR', 'IE >= 9', 
+		'Safari >= 5.1', 
+		'last 4 Opera versions' 
+	]
 };
 
 var clean = function() {
