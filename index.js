@@ -39,14 +39,16 @@ var makeCss = function( source, target, opts ) {
 
 	var csslint = require( 'gulp-csslint' ),
 		less = require( 'gulp-less' ),
-		autoprefixer = require( 'gulp-autoprefixer' );
+		autoprefixer = require( 'gulp-autoprefixer' ),
+		rename = require('gulp-rename');
 
 	return vfs.src( source )
 		.pipe( less() )
 		.pipe( autoprefixer( prefixOpts ) )
 		.pipe( csslint( ( opts && opts.lintOpts ) ? opts.lintOpts : '' ) )
 		.pipe( csslint.reporter() )
-		.pipe( vfs.dest( target ) );
+		.pipe( rename( target ) )
+		.pipe( vfs.dest( './' ) );
 
 };
 
