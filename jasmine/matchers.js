@@ -154,6 +154,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'background-color' );
 			},
 
+			toHaveBackgroundPosition: function() {
+				return d2l.jasmine._private.createCompareStyle( 'background-position' );
+			},
+
 			toHaveBeforeElementContent: function() {
 				return d2l.jasmine._private.createCompareStyle( 'content', ':before' );
 			},
