@@ -297,6 +297,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'font-size' );
 			},
 
+			toHaveFontStyle: function() {
+				return d2l.jasmine._private.createCompareStyle( 'font-style' );
+			},
+
 			toHaveFontWeight: function() {
 				return d2l.jasmine._private.createCompareStyle( 'font-weight' );
 			},
