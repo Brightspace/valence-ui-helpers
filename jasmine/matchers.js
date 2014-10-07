@@ -123,6 +123,27 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'background-color' );
 			},
 
+			toHaveBackgroundPosition: function() {
+				return d2l.jasmine._private.createCompareStyle( 'background-position' );
+			},
+
+			toHaveBackgroundRepeat: function() {
+				return d2l.jasmine._private.createCompareStyle( 'background-repeat' );
+			},
+
+			toHaveBase64BackgroundImage: function() {
+				return {
+					compare: function( actual ) {
+						var compareObj = d2l.jasmine._private.createCompareStyle( 
+							'background-image', 
+							null, 
+							'startsWith' 
+						);
+						return compareObj.compare( actual, 'url(data:image/png;base64,' );
+					}
+				};
+			},
+
 			toHaveBeforeElementContent: function() {
 				return d2l.jasmine._private.createCompareStyle( 'content', ':before' );
 			},
@@ -202,6 +223,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
 			},
 
+			toHaveBottomPadding: function() {
+				return d2l.jasmine._private.createCompareStyle( 'padding-bottom' );
+			},
+
 			toHaveBottomRightBorderRadius: function() {
 				return d2l.jasmine._private.createCompareStyle( 'border-bottom-right-radius' );
 			},
@@ -257,6 +282,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'font-size' );
 			},
 
+			toHaveFontStyle: function() {
+				return d2l.jasmine._private.createCompareStyle( 'font-style' );
+			},
+
 			toHaveFontWeight: function() {
 				return d2l.jasmine._private.createCompareStyle( 'font-weight' );
 			},
@@ -271,6 +300,10 @@ var d2l = {
 
 			toHaveLeftMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-left' );
+			},
+
+			toHaveLeftPadding: function() {
+				return d2l.jasmine._private.createCompareStyle( 'padding-left' );
 			},
 
 			toHaveLineHeight: function() {
@@ -293,6 +326,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareBoxValues( 'margin' );
 			},
 
+			toHaveOverflow: function() {
+				return d2l.jasmine._private.createCompareStyle( 'overflow' );
+			},
+
 			toHavePadding: function() {
 				return d2l.jasmine._private.createCompareBoxValues( 'padding' );
 			},
@@ -309,6 +346,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'text-align' );
 			},
 
+			toHaveRightPadding: function() {
+				return d2l.jasmine._private.createCompareStyle( 'padding-right' );
+			},
+
 			toHaveTextDecoration: function() {
 				return d2l.jasmine._private.createCompareStyle( 'text-decoration' );
 			},
@@ -323,6 +364,10 @@ var d2l = {
 
 			toHaveTopMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-top' );
+			},
+
+			toHaveTopPadding: function() {
+				return d2l.jasmine._private.createCompareStyle( 'padding-top' );
 			},
 
 			toHaveTopRightBorderRadius: function() {
