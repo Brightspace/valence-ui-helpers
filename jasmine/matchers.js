@@ -158,6 +158,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'background-position' );
 			},
 
+			toHaveBackgroundRepeat: function() {
+				return d2l.jasmine._private.createCompareStyle( 'background-repeat' );
+			},
+
 			toHaveBase64BackgroundImage: function() {
 				return {
 					compare: function( actual ) {
