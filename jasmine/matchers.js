@@ -308,6 +308,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareBoxValues( 'margin' );
 			},
 
+			toHaveOverflow: function() {
+				return d2l.jasmine._private.createCompareStyle( 'overflow' );
+			},
+
 			toHavePadding: function() {
 				return d2l.jasmine._private.createCompareBoxValues( 'padding' );
 			},
