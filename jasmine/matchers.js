@@ -223,10 +223,13 @@ var d2l = {
 
 						for ( var i=0; i<doc.styleSheets.length; ++i ) {
 							for ( var j=0; j<doc.styleSheets[i].cssRules.length; ++j ) {
-								var selectors = doc.styleSheets[i].cssRules[j].selectorText.split( ',' );
-								for ( var k=0; k<selectors.length; k++ ) {
-									if ( selectors[k].replace( /(^\s+|\s+$)/g,'' ) === expected ) {
-										return { pass: true };
+								var selectorText = doc.styleSheets[i].cssRules[j].selectorText;
+								if ( selectorText !== undefined ) {
+									var selectors = selectorText.split( ',' );
+									for ( var k=0; k<selectors.length; k++ ) {
+										if ( selectors[k].replace( /(^\s+|\s+$)/g,'' ) === expected ) {
+											return { pass: true };
+										}
 									}
 								}
 							}
@@ -324,6 +327,10 @@ var d2l = {
 
 			toHaveTopRightBorderRadius: function() {
 				return d2l.jasmine._private.createCompareStyle( 'border-top-right-radius' );
+			},
+
+			toHaveWidth: function() {
+				return d2l.jasmine._private.createCompareStyle( 'width' );
 			},
 
 			toBeOnBrowser: function( ) {
