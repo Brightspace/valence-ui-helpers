@@ -29,5 +29,10 @@
     "rimraf": "^2.2.8",
     "through2": "^0.6.2",
     "vinyl-fs": "^0.3.7"
-  }
+  },
+  "keywords": [
+    "d2l",
+    "valence-ui",
+    "vui"
+  ]
 }
