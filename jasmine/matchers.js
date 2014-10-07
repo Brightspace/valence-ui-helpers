@@ -337,6 +337,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'border-top-right-radius' );
 			},
 
+			toHaveWidth: function() {
+				return d2l.jasmine._private.createCompareStyle( 'width' );
+			},
+
 			toBeOnBrowser: function( ) {
 				return {
 					compare: function( actual, browserExpected ) {
