@@ -158,6 +158,19 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'background-position' );
 			},
 
+			toHaveBase64BackgroundImage: function() {
+				return {
+					compare: function( actual ) {
+						var compareObj = d2l.jasmine._private.createCompareStyle( 
+							'background-image', 
+							null, 
+							'startsWith' 
+						);
+						return compareObj.compare( actual, 'url(data:image/png;base64,' );
+					}
+				};
+			},
+
 			toHaveBeforeElementContent: function() {
 				return d2l.jasmine._private.createCompareStyle( 'content', ':before' );
 			},
