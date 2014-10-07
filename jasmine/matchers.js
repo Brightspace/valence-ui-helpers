@@ -4,27 +4,29 @@ var d2l = {
 
 		_private: {
 
-			createCompareBoxValues: function( property ) {
+			createCompareBoxValues: function( propertyPrefix, propertySuffix ) {
 
 				return {
 					compare: function( actual, expected ) {
+						propertyPrefix = propertyPrefix ? propertyPrefix + "-" : "";
+						propertySuffix = propertySuffix ? "-" + propertySuffix : "";
 
-						var topResult = d2l.jasmine._private.createCompareStyle( property + '-top' ).compare( actual, expected );
+						var topResult = d2l.jasmine._private.createCompareStyle( propertyPrefix + 'top' + propertySuffix ).compare( actual, expected );
 						if ( !topResult.pass ) {
 							return topResult;
 						}
 
-						var rightResult = d2l.jasmine._private.createCompareStyle( property + '-right' ).compare( actual, expected );
+						var rightResult = d2l.jasmine._private.createCompareStyle( propertyPrefix + 'right' + propertySuffix ).compare( actual, expected );
 						if ( !rightResult.pass ) {
 							return rightResult;
 						}
 
-						var bottomResult = d2l.jasmine._private.createCompareStyle( property + '-bottom' ).compare( actual, expected );
+						var bottomResult = d2l.jasmine._private.createCompareStyle( propertyPrefix + 'bottom' + propertySuffix ).compare( actual, expected );
 						if ( !bottomResult.pass ) {
 							return bottomResult;
 						}
 
-						var leftResult = d2l.jasmine._private.createCompareStyle( property + '-left' ).compare( actual, expected );
+						var leftResult = d2l.jasmine._private.createCompareStyle( propertyPrefix + 'left' + propertySuffix ).compare( actual, expected );
 						if ( !leftResult.pass ) {
 							return leftResult;
 						}
@@ -143,6 +145,18 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'display', ':before' );
 			},
 
+			toHaveBorder: function() {
+				return d2l.jasmine._private.createCompareBoxValues( 'border' );
+			},
+
+			toHaveBorderStyle: function() {
+				return d2l.jasmine._private.createCompareBoxValues( 'border', 'style' );
+			},
+
+			toHaveBorderWidth: function() {
+				return d2l.jasmine._private.createCompareBoxValues( 'border', 'width' );
+			},
+
 			toHaveBottomMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
 			},
@@ -177,6 +191,10 @@ var d2l = {
 
 					}
 				};
+			},
+
+			toHaveCursor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'cursor' );
 			},
 
 			toHaveDisplay: function() {
@@ -229,6 +247,10 @@ var d2l = {
 
 			toHaveRightMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-right' );
+			},
+
+			toHaveTextAlign: function() {
+				return d2l.jasmine._private.createCompareStyle( 'text-align' );
 			},
 
 			toHaveTextDecoration: function() {
