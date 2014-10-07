@@ -5,7 +5,6 @@ var d2l = {
 		_private: {
 
 			createCompareBoxValues: function( propertyPrefix, propertySuffix ) {
-
 				return {
 					compare: function( actual, expected ) {
 						propertyPrefix = propertyPrefix ? propertyPrefix + "-" : "";
@@ -157,8 +156,54 @@ var d2l = {
 				return d2l.jasmine._private.createCompareBoxValues( 'border', 'width' );
 			},
 
+			toHaveBorderColor: function() {
+				return d2l.jasmine._private.createCompareBoxValues( 'border', 'color' );
+			},
+
+			toHaveBorderRadius: function() {
+				return {
+					compare: function( actual, expected ) {
+
+						var topRightResult = d2l.jasmine._private.createCompareStyle( 'border-top-right-radius' ).compare( actual, expected );
+						if ( !topRightResult.pass ) {
+							return topRightResult;
+						}
+
+						var bottomRightResult = d2l.jasmine._private.createCompareStyle( 'border-bottom-right-radius' ).compare( actual, expected );
+						if ( !bottomRightResult.pass ) {
+							return bottomRightResult;
+						}
+
+						var bottomLeftResult = d2l.jasmine._private.createCompareStyle( 'border-bottom-left-radius' ).compare( actual, expected );
+						if ( !bottomLeftResult.pass ) {
+							return bottomLeftResult;
+						}
+
+						var topLeftResult = d2l.jasmine._private.createCompareStyle( 'border-top-left-radius' ).compare( actual, expected );
+						if ( !topLeftResult.pass ) {
+							return topLeftResult;
+						}
+
+						return { pass: true };
+
+					}
+				};
+			},
+
+			toHaveBottomBorderColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-bottom-color' );
+			},
+
+			toHaveBottomLeftBorderRadius: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-bottom-left-radius' );
+			},
+
 			toHaveBottomMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-bottom' );
+			},
+
+			toHaveBottomRightBorderRadius: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-bottom-right-radius' );
 			},
 
 			toHaveColor: function() {
@@ -217,6 +262,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'height' );
 			},
 
+			toHaveLeftBorderColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-left-color' );
+			},
+
 			toHaveLeftMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-left' );
 			},
@@ -245,6 +294,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareBoxValues( 'padding' );
 			},
 
+			toHaveRightBorderColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-right-color' );
+			},
+
 			toHaveRightMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-right' );
 			},
@@ -257,8 +310,20 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'text-decoration' );
 			},
 
+			toHaveTopBorderColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-top-color' );
+			},
+
+			toHaveTopLeftBorderRadius: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-top-left-radius' );
+			},
+
 			toHaveTopMargin: function() {
 				return d2l.jasmine._private.createCompareStyle( 'margin-top' );
+			},
+
+			toHaveTopRightBorderRadius: function() {
+				return d2l.jasmine._private.createCompareStyle( 'border-top-right-radius' );
 			},
 
 			toBeOnBrowser: function( ) {
