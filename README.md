@@ -1,4 +1,4 @@
-#VUI Helpers
+#VUI Helpers [![Build Status](https://travis-ci.org/Desire2Learn-Valence/valence-ui-helpers.svg?branch=master)](https://travis-ci.org/Desire2Learn-Valence/valence-ui-helpers)
 
 This project contains GULP helper scripts for building VUI components.
 
