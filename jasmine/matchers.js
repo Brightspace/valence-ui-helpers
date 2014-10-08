@@ -231,6 +231,10 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'border-bottom-right-radius' );
 			},
 
+			toHaveBoxShadow: function() {
+				return d2l.jasmine._private.createCompareStyle( 'box-shadow' );
+			},
+
 			toHaveColor: function() {
 				return d2l.jasmine._private.createCompareStyle( 'color' );
 			},
@@ -324,6 +328,34 @@ var d2l = {
 
 			toHaveMargin: function() {
 				return d2l.jasmine._private.createCompareBoxValues( 'margin' );
+			},
+
+			toHaveMaxHeight: function() {
+				return d2l.jasmine._private.createCompareStyle( 'max-height' );
+			},
+
+			toHaveMaxWidth: function() {
+				return d2l.jasmine._private.createCompareStyle( 'max-width' );
+			},
+
+			toHaveMinHeight: function() {
+				return d2l.jasmine._private.createCompareStyle( 'min-height' );
+			},
+
+			toHaveMinWidth: function() {
+				return d2l.jasmine._private.createCompareStyle( 'min-width' );
+			},
+
+			toHaveOutlineColor: function() {
+				return d2l.jasmine._private.createCompareStyle( 'outline-color' );
+			},
+
+			toHaveOutlineStyle: function() {
+				return d2l.jasmine._private.createCompareStyle( 'outline-style' );
+			},
+
+			toHaveOutlineWidth: function() {
+				return d2l.jasmine._private.createCompareStyle( 'outline-width' );
 			},
 
 			toHaveOverflow: function() {
