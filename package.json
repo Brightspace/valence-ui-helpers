@@ -1,7 +1,7 @@
 {
   "name": "vui-helpers",
   "description": "Gulp helper scripts for building VUI components",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "repository": {
@@ -26,8 +26,6 @@
     "karma-safari-launcher": "^0.1.1",
     "karma-script-launcher": "^0.1.0",
     "q": "^1.0.1",
-    "rimraf": "^2.2.8",
-    "through2": "^0.6.2",
     "vinyl-fs": "^0.3.7"
   },
   "keywords": [
