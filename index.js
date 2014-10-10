@@ -12,29 +12,6 @@ var prefixOpts = {
 	]
 };
 
-var clean = function() {
-
-	var rm = require( 'rimraf' ),
-		through2 = require( 'through2' );
-
-	var paths = [];
-
-	var inspectIt = function( file, enc, done ) {
-		paths.push( file.path );
-		done();
-	};
-
-	var washIt = function( done ) {
-		for ( var i=0; i<paths.length; i++ ) {
-			rm.sync( paths[i] );
-		}
-		done();
-	};
-
-	return through2.obj( inspectIt, washIt );
-
-};
-
 var makeCss = function( source, target, opts ) {
 
 	var csslint = require( 'gulp-csslint' ),
@@ -75,8 +52,6 @@ var test = function( config, js, css ) {
 		} ) );
 
 };
-
-module.exports.clean = clean;
 
 module.exports.makeCss = makeCss;
 
