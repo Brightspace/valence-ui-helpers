@@ -38,16 +38,24 @@ var makeLess = function( source, target ) {
 
 var test = function( config, js, css ) {
 
+	var files = [ 'node_modules/vui-helpers/jasmine/matchers.js' ];
+
+	if ( typeof js === 'string' ) {
+		files.push( js );
+	} else if ( ( typeof js === 'object' ) && js.length !== undefined ) {
+		files = files.concat( js );
+	}
+
+	if ( css !== undefined ) {
+		files.push( { pattern: css, included: true } );
+	}
+
 	var karma = require( 'gulp-karma' );
 
 	return vfs.src( 'empty-stream' )
 		.pipe( karma( { 
 			configFile: config, 
-			files: [ 
-				'node_modules/vui-helpers/jasmine/matchers.js',
-				js, 
-				{ pattern: css, included: true }
-			],
+			files: files,
 			action: 'run' 
 		} ) );
 
