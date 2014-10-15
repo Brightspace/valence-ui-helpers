@@ -68,17 +68,20 @@ Helper for testing with [Karma](https://www.npmjs.org/package/gulp-karma).
 
 ```javascript
 gulp.task( 'test', function () {
-  return vui.test(
-    'test/unit/karma.conf.js',
-    'test/unit/**/*Spec.js',
-    'dist/**/*.css'
-  );
+  return vui.test( {
+    files: [
+      'my-component.js',
+      'my-component.css',
+      'test/unit/**/*Spec.js'
+    ],
+    preprocessors: {
+      'my-component.js': ['coverage']
+    }
+  } );
 } );
 ```
 
-The first parameter is the location of a karma configuration file, followed by
-a glob which defines your test specs. The last parameter is a glob for any
-CSS files to be included in the tests.
+The test helper configures the Karma test runner to use PhantomJS, coverage reporters, and Jasmine. It also includes custom Jasmine matchers that may be used in your specs. A config object must be provided to the test helper to specify the files/patterns for the test. Other Karma config properties may be provided, for instance to include files for coverage via the preprocessor property.
 
 ## Contributiing
 
