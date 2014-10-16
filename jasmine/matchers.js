@@ -70,6 +70,39 @@ var d2l = {
 				};
 			},
 
+			diffDefaultStyle: function( classStyledElement ) {
+				var defaultElement = classStyledElement.cloneNode(true);
+				defaultElement.className="";
+				classStyledElement.parentNode.appendChild( defaultElement );
+
+		    	var actualComputed = window.getComputedStyle( classStyledElement );
+				var defaultComputed = window.getComputedStyle( defaultElement );
+
+		        if (!actualComputed || !defaultComputed) {
+					classStyledElement.parentNode.removeChild( defaultElement );
+		            return null;
+		        }
+
+		        var diff = {};
+
+		        for (var i = 0; i < actualComputed.length; i++) {
+		        	var aName = actualComputed.item(i);
+
+		            var actualValue = actualComputed.getPropertyValue(aName);
+		            var defaultValue = defaultComputed.getPropertyValue(aName);
+
+		            if ( actualValue === defaultValue ) {
+		                continue;
+		            }
+
+		            diff[aName] = actualValue;
+		        }
+
+				classStyledElement.parentNode.removeChild( defaultElement );
+
+				return diff;
+			},
+
 			extractBrowser: function( userAgent, expected ) {
 
 				var result;
@@ -454,6 +487,29 @@ var d2l = {
 							message: 'Expected ' + actual + ' to be ' + osExpected
 						};
 
+					}
+				};
+			},
+
+			toHaveClassStyles: function(util, customEqualityTesters) {
+				return {
+					compare: function ( actual, expected ) {
+						var diff = d2l.jasmine._private.diffDefaultStyle( actual );
+				        var result = {};
+
+			       		var retStr = "";
+				        for( var p in diff ) {
+							if(diff[p] === expected[p]) {
+								continue;
+							}
+			       			retStr = retStr + "Expected " + p + " to be " + expected[p] + " but got " + diff[p] + " \n";
+				        	result[p] = diff[p];
+			       		}
+
+						return {
+							pass: util.equals(result, {}),
+							message: retStr == "" ? JSON.stringify(result) : retStr
+						};
 					}
 				};
 			}
