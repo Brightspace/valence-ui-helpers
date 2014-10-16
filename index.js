@@ -70,6 +70,12 @@ var test = function( config ) {
 				}
 			}
 
+		} else if ( key == 'preprocessors' ) {
+
+			for( var fKey in config.preprocessors ) {
+				karmaConfig.preprocessors[fKey] = config.preprocessors[fKey];
+			}
+
 		} else {
 
 			// copy forward other configs

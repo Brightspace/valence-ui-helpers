@@ -125,8 +125,28 @@ var d2l = {
 
 				return result;
 
-			}
+			},
 
+		},
+
+		reporters: {
+			expectedResultReporter: {
+				erReport : {},
+
+				suiteStarted: function(suiteInfo) {
+					erReport = {};
+				},
+
+				specDone: function(result) {
+				    for(var i = 0; i < result.failedExpectations.length; i++) {
+				      erReport[result.failedExpectations[i].matcherName] = JSON.parse(result.failedExpectations[i].message);
+				    }
+				},
+
+				suiteDone: function(result) {
+					dump(erReport);
+				}
+			}
 		},
 
 		matchers: {
@@ -499,10 +519,12 @@ var d2l = {
 
 			       		var retStr = "";
 				        for( var p in diff ) {
+				        	// @if !ER_GEN
 							if(diff[p] === expected[p]) {
 								continue;
 							}
 			       			retStr = retStr + "Expected " + p + " to be " + expected[p] + " but got " + diff[p] + " \n";
+				        	// @endif
 				        	result[p] = diff[p];
 			       		}
 
@@ -512,10 +534,14 @@ var d2l = {
 						};
 					}
 				};
-			}
+			}			
 
 		}
 
 	}
 
 };
+
+// @if ER_GEN
+jasmine.getEnv().addReporter(d2l.jasmine.reporters.expectedResultReporter);
+// @endif

@@ -17,15 +17,23 @@ module.exports = function( config ) {
 			outputFile: 'test/output/unit.xml',
 			suite: 'unit'
 		},
+		loggers: [{
+			type: 'file',
+			filename: 'log.txt'
+		}],
 		plugins : [
 			'karma-chrome-launcher',
 			'karma-coverage',
+			'karma-directives-preprocessor',
 			'karma-jasmine',
 			'karma-junit-reporter',
 			'karma-firefox-launcher',
 			'karma-phantomjs-launcher',
 			'karma-script-launcher'
 		],
+		preprocessors: {
+				'node_modules/vui-helpers/jasmine/matchers.js' : ['directives']
+			},
 		reporters: ['progress','junit','coverage']
 	} );
 };
