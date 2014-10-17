@@ -18,18 +18,25 @@ module.exports = function( config ) {
 			suite: 'unit'
 		},
 		plugins : [
+			require('./json-dumper.js'),
 			'karma-chrome-launcher',
 			'karma-coverage',
 			'karma-directives-preprocessor',
 			'karma-jasmine',
+			'karma-json-fixtures-preprocessor',
 			'karma-junit-reporter',
 			'karma-firefox-launcher',
 			'karma-phantomjs-launcher',
 			'karma-script-launcher'
 		],
 		preprocessors: {
-				'node_modules/vui-helpers/jasmine/matchers.js' : ['directives']
+				'node_modules/vui-helpers/jasmine/matchers.js' : ['directives'],
+				'test/er/*.json' : ['json_fixtures']
 			},
-		reporters: ['progress','junit','coverage']
+		jsonFixturesPreprocessor: {
+			variableName: '__ER__',
+			stripPrefix: 'test/er/'
+		},	
+		reporters: ['json-dumper']
 	} );
 };

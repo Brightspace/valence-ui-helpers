@@ -36,7 +36,7 @@ var makeLess = function( source, target ) {
 
 };
 
-var test = function( config ) {
+var test = function( config, generateExpectedResults ) {
 
 	if ( !config ) {
 		console.log( 'No config specified.' );
@@ -45,7 +45,15 @@ var test = function( config ) {
 
 	var karmaConfig = {
 		configFile: 'node_modules/vui-helpers/karma.conf.js',
-		files: [ 'node_modules/vui-helpers/jasmine/matchers.js' ],
+		files: [ 
+			'node_modules/vui-helpers/jasmine/matchers.js',
+			'test/er/*.json'
+		],
+		directivesPreprocess: {
+			flags: {
+				'js' : { ER_GEN: generateExpectedResults || false }
+			}
+		},
 		action: 'run'
 	};
 

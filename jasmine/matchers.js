@@ -70,6 +70,33 @@ var d2l = {
 				};
 			},
 
+			extractBrowser: function( userAgent, expected ) {
+
+				var result;
+
+				if( userAgent.indexOf("Chrome") > -1 ) {
+					result = expected.Chrome;
+				} else if( userAgent.indexOf("Safari") > -1 ) {
+					result = expected.Safari;
+				} else if( userAgent.indexOf("Opera") > -1 ) {
+					result = expected.Opera;
+				} else if( userAgent.indexOf("Firefox") > -1 ) {
+					result = expected.Firefox;
+				} else if( userAgent.indexOf("MSIE") > -1 ) {
+					result = expected.MSIE;
+				}
+
+				if( result === undefined ) {
+					result = expected.default;
+				}
+
+				return result;
+			}
+
+		},
+
+		differs : {
+
 			diffDefaultStyle: function( classStyledElement ) {
 				var defaultElement = classStyledElement.cloneNode(true);
 				defaultElement.className="";
@@ -101,30 +128,6 @@ var d2l = {
 				classStyledElement.parentNode.removeChild( defaultElement );
 
 				return diff;
-			},
-
-			extractBrowser: function( userAgent, expected ) {
-
-				var result;
-
-				if( userAgent.indexOf("Chrome") > -1 ) {
-					result = expected.Chrome;
-				} else if( userAgent.indexOf("Safari") > -1 ) {
-					result = expected.Safari;
-				} else if( userAgent.indexOf("Opera") > -1 ) {
-					result = expected.Opera;
-				} else if( userAgent.indexOf("Firefox") > -1 ) {
-					result = expected.Firefox;
-				} else if( userAgent.indexOf("MSIE") > -1 ) {
-					result = expected.MSIE;
-				}
-
-				if( result === undefined ) {
-					result = expected.default;
-				}
-
-				return result;
-
 			},
 
 		},
@@ -491,26 +494,35 @@ var d2l = {
 				};
 			},
 
-			toHaveClassStyles: function(util, customEqualityTesters) {
+			toMatchER: function(util, customEqualityTesters) {
+
 				return {
 					compare: function ( actual, expected ) {
-						var diff = d2l.jasmine._private.diffDefaultStyle( actual );
-				        var result = {};
+						var er = __ER__;
+						var path = expected.split(".");
+					    var arRoot = {};
+					    var ar = arRoot;
+					   	for( var i = 0; i < path.length; i++ ) {
+					       	er = er[path[i]] || {};
+							arRoot[path[i]] = i != path.length - 1 ? {} : actual;
+							arRoot = arRoot[path[i]];
+					    };
+
+			       		// @if ER_GEN
+						dump(JSON.stringify(ar));
+						// @endif
 
 			       		var retStr = "";
-				        for( var p in diff ) {
-				        	// @if !ER_GEN
-							if(diff[p] === expected[p]) {
+				        for( var p in actual ) {
+							if(actual[p] === er[p]) {
 								continue;
 							}
-			       			retStr = retStr + "Expected " + p + " to be " + expected[p] + " but got " + diff[p] + " \n";
-				        	// @endif
-				        	result[p] = diff[p];
+			       			retStr = retStr + "Expected " + p + " to be " + er[p] + " but got " + actual[p] + " \n";
 			       		}
 
 						return {
-							pass: util.equals(result, {}),
-							message: retStr == "" ? JSON.stringify(result) : retStr
+							pass: retStr == "",
+							message: retStr
 						};
 					}
 				};
