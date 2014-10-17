@@ -129,26 +129,6 @@ var d2l = {
 
 		},
 
-		reporters: {
-			expectedResultReporter: {
-				erReport : {},
-
-				suiteStarted: function(suiteInfo) {
-					erReport = {};
-				},
-
-				specDone: function(result) {
-				    for(var i = 0; i < result.failedExpectations.length; i++) {
-				      erReport[result.failedExpectations[i].matcherName] = JSON.parse(result.failedExpectations[i].message);
-				    }
-				},
-
-				suiteDone: function(result) {
-					dump(erReport);
-				}
-			}
-		},
-
 		matchers: {
 
 			toHaveAfterElementContent: function() {
@@ -541,7 +521,3 @@ var d2l = {
 	}
 
 };
-
-// @if ER_GEN
-jasmine.getEnv().addReporter(d2l.jasmine.reporters.expectedResultReporter);
-// @endif

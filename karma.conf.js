@@ -17,10 +17,6 @@ module.exports = function( config ) {
 			outputFile: 'test/output/unit.xml',
 			suite: 'unit'
 		},
-		loggers: [{
-			type: 'file',
-			filename: 'log.txt'
-		}],
 		plugins : [
 			'karma-chrome-launcher',
 			'karma-coverage',
