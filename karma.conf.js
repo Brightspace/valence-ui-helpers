@@ -29,14 +29,6 @@ module.exports = function( config ) {
 			'karma-phantomjs-launcher',
 			'karma-script-launcher'
 		],
-		preprocessors: {
-				'node_modules/vui-helpers/jasmine/matchers.js' : ['directives'],
-				'test/er/*.json' : ['json_fixtures']
-			},
-		jsonFixturesPreprocessor: {
-			variableName: '__ER__',
-			stripPrefix: 'test/er/'
-		},	
-		reporters: ['json-dumper']
+		reporters: ['progress','junit','coverage']
 	} );
 };
