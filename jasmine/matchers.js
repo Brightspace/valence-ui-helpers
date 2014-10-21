@@ -97,13 +97,14 @@ var d2l = {
 
 		differs : {
 
-			diffDefaultStyle: function( classStyledElement ) {
+			diffDefaultStyle: function( classStyledElement, pseudoElt ) {
 				var defaultElement = classStyledElement.cloneNode(true);
 				defaultElement.className="";
 				classStyledElement.parentNode.appendChild( defaultElement );
 
-		    	var actualComputed = window.getComputedStyle( classStyledElement );
-				var defaultComputed = window.getComputedStyle( defaultElement );
+		    	var actualComputed = window.getComputedStyle( classStyledElement, pseudoElt || null );
+
+				var defaultComputed = window.getComputedStyle( defaultElement, pseudoElt || null );
 
 		        if (!actualComputed || !defaultComputed) {
 					classStyledElement.parentNode.removeChild( defaultElement );
@@ -499,22 +500,29 @@ var d2l = {
 				return {
 					compare: function ( actual, expected ) {
 
-						var expectedResult = __ER__;
+						var expectedResult;
 						var path = expected.split(".");
 
+						// @if !ER_GEN
+						expectedResult = __ER__; // will not exist if there are no ERs yet.
+						// @endif
+
 						// @if ER_GEN
+						expectedResult = actual;
 					    var recordingRoot = {};
 					    var recordedActual = recordingRoot;
 					    // @endif
 
 					   	for( var i = 0; i < path.length; i++ ) {
 
+					   		// @if !ER_GEN
 					   		// find the expected result stored at the expected path.
 					       	expectedResult = expectedResult[path[i]] || {};
+					   		// @endif
 
 							// @if ER_GEN
-					       	// record a destination path containing the actual result at the leaf.
-							recordingRoot[path[i]] = (i != path.length - 1) ? {} : actual;
+					       	// record a destination path containing the result at the leaf.
+							recordingRoot[path[i]] = (i != path.length - 1) ? {} : expectedResult;
 							recordingRoot = recordingRoot[path[i]];
 						    // @endif
 

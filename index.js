@@ -66,7 +66,11 @@ var test = function( config, isRecordingResults ) {
 	};
 
 	if( fs.existsSync( 'test/er/' ) ) {
-        karmaConfig.files.push( 'test/er/*.json' );
+		if( fs.readdirSync( 'test/er/' ).length != 0 ) {
+        	karmaConfig.files.push( 'test/er/*.json' );
+    	}
+	} else {
+		fs.mkdirSync( 'test/er/' );
 	}
 
 	if( isRecordingResults ) {
