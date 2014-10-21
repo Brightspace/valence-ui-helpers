@@ -6,10 +6,7 @@ module.exports = function( config ) {
 		basePath: '../../',
 		browsers: ['PhantomJS'],
 		coverageReporter: {
-			reporters: [
-				{ type: 'html', dir: 'test/output/coverage/' },
-				{ type: 'cobertura', dir: 'test/output/coverage/' }
-			]
+			reporters: [ { type: 'lcov', dir: 'test/output/coverage/' } ]
 		},
 		exclude: [],
 		frameworks: ['jasmine'],
