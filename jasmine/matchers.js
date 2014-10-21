@@ -499,22 +499,29 @@ var d2l = {
 				return {
 					compare: function ( actual, expected ) {
 
-						var expectedResult = __ER__;
+						var expectedResult;
 						var path = expected.split(".");
 
+						// @if !ER_GEN
+						expectedResult = __ER__; // will not exist if there are no ERs yet.
+						// @endif
+
 						// @if ER_GEN
+						expectedResult = actual;
 					    var recordingRoot = {};
 					    var recordedActual = recordingRoot;
 					    // @endif
 
 					   	for( var i = 0; i < path.length; i++ ) {
 
+					   		// @if !ER_GEN
 					   		// find the expected result stored at the expected path.
 					       	expectedResult = expectedResult[path[i]] || {};
+					   		// @endif
 
 							// @if ER_GEN
-					       	// record a destination path containing the actual result at the leaf.
-							recordingRoot[path[i]] = (i != path.length - 1) ? {} : actual;
+					       	// record a destination path containing the result at the leaf.
+							recordingRoot[path[i]] = (i != path.length - 1) ? {} : expectedResult;
 							recordingRoot = recordingRoot[path[i]];
 						    // @endif
 
