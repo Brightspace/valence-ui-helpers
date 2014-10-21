@@ -91,8 +91,44 @@ var d2l = {
 				}
 
 				return result;
-
 			}
+
+		},
+
+		differs : {
+
+			diffDefaultStyle: function( classStyledElement ) {
+				var defaultElement = classStyledElement.cloneNode(true);
+				defaultElement.className="";
+				classStyledElement.parentNode.appendChild( defaultElement );
+
+		    	var actualComputed = window.getComputedStyle( classStyledElement );
+				var defaultComputed = window.getComputedStyle( defaultElement );
+
+		        if (!actualComputed || !defaultComputed) {
+					classStyledElement.parentNode.removeChild( defaultElement );
+		            return null;
+		        }
+
+		        var diff = {};
+
+		        for (var i = 0; i < actualComputed.length; i++) {
+		        	var aName = actualComputed.item(i);
+
+		            var actualValue = actualComputed.getPropertyValue(aName);
+		            var defaultValue = defaultComputed.getPropertyValue(aName);
+
+		            if ( actualValue === defaultValue ) {
+		                continue;
+		            }
+
+		            diff[aName] = actualValue;
+		        }
+
+				classStyledElement.parentNode.removeChild( defaultElement );
+
+				return diff;
+			},
 
 		},
 
@@ -105,10 +141,10 @@ var d2l = {
 			toHaveAfterElementBase64Image: function() {
 				return {
 					compare: function( actual ) {
-						var compareObj = d2l.jasmine._private.createCompareStyle( 
-							'content', 
-							':after', 
-							'startsWith' 
+						var compareObj = d2l.jasmine._private.createCompareStyle(
+							'content',
+							':after',
+							'startsWith'
 						);
 						return compareObj.compare( actual, 'url(data:image/png;base64,' );
 					}
@@ -134,10 +170,10 @@ var d2l = {
 			toHaveBase64BackgroundImage: function() {
 				return {
 					compare: function( actual ) {
-						var compareObj = d2l.jasmine._private.createCompareStyle( 
-							'background-image', 
-							null, 
-							'startsWith' 
+						var compareObj = d2l.jasmine._private.createCompareStyle(
+							'background-image',
+							null,
+							'startsWith'
 						);
 						return compareObj.compare( actual, 'url(data:image/png;base64,' );
 					}
@@ -151,10 +187,10 @@ var d2l = {
 			toHaveBeforeElementBase64Image: function() {
 				return {
 					compare: function( actual ) {
-						var compareObj = d2l.jasmine._private.createCompareStyle( 
-							'content', 
-							':before', 
-							'startsWith' 
+						var compareObj = d2l.jasmine._private.createCompareStyle(
+							'content',
+							':before',
+							'startsWith'
 						);
 						return compareObj.compare( actual, 'url(data:image/png;base64,' );
 					}
@@ -413,8 +449,8 @@ var d2l = {
 			toBeOnBrowser: function( ) {
 				return {
 					compare: function( actual, browserExpected ) {
-						
-						var expected = d2l.jasmine._private.extractBrowser( 
+
+						var expected = d2l.jasmine._private.extractBrowser(
 								navigator.userAgent,
 								browserExpected
 							);
@@ -433,7 +469,7 @@ var d2l = {
 					compare: function( actual, agentExpected ) {
 						var userAgent = navigator.userAgent;
 
-						var expected = d2l.jasmine._private.extractBrowser( 
+						var expected = d2l.jasmine._private.extractBrowser(
 								userAgent,
 								agentExpected
 							);
@@ -452,6 +488,53 @@ var d2l = {
 						return {
 							pass: actual === osExpected,
 							message: 'Expected ' + actual + ' to be ' + osExpected
+						};
+
+					}
+				};
+			},
+
+			toMatchER: function() {
+
+				return {
+					compare: function ( actual, expected ) {
+
+						var expectedResult = __ER__;
+						var path = expected.split(".");
+
+						// @if ER_GEN
+					    var recordingRoot = {};
+					    var recordedActual = recordingRoot;
+					    // @endif
+
+					   	for( var i = 0; i < path.length; i++ ) {
+
+					   		// find the expected result stored at the expected path.
+					       	expectedResult = expectedResult[path[i]] || {};
+
+							// @if ER_GEN
+					       	// record a destination path containing the actual result at the leaf.
+							recordingRoot[path[i]] = (i != path.length - 1) ? {} : actual;
+							recordingRoot = recordingRoot[path[i]];
+						    // @endif
+
+					    };
+
+			       		// @if ER_GEN
+						dump(JSON.stringify(recordedActual));
+						// @endif
+
+			       		var retStr = "";
+				        for( var p in actual ) {
+							if(actual[p] === expectedResult[p]) {
+								continue;
+							}
+			       			retStr = retStr + "Expected " + p + " to be " + expectedResult[p] + " but got " + actual[p] + " \n";
+			       		}
+
+						return {
+							pass: retStr == "",
+							message: retStr
 						};
 
 					}

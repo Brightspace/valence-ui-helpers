@@ -1,6 +1,7 @@
 'use strict';
 
 var vfs = require( 'vinyl-fs' );
+var fs = require( 'fs' );
 
 var prefixOpts = {
 	browsers: [
@@ -36,7 +37,7 @@ var makeLess = function( source, target ) {
 
 };
 
-var test = function( config ) {
+var test = function( config, isRecordingResults ) {
 
 	if ( !config ) {
 		console.log( 'No config specified.' );
@@ -45,9 +46,32 @@ var test = function( config ) {
 
 	var karmaConfig = {
 		configFile: 'node_modules/vui-helpers/karma.conf.js',
-		files: [ 'node_modules/vui-helpers/jasmine/matchers.js' ],
+		files: [
+			'node_modules/vui-helpers/jasmine/matchers.js'
+		],
+		preprocessors: {
+			'node_modules/vui-helpers/jasmine/matchers.js' : ['directives'],
+			'test/er/*.json' : ['json_fixtures']
+		},
+		directivesPreprocess: {
+			flags: {
+				'js' : { ER_GEN: isRecordingResults == true }
+			}
+		},
+		jsonFixturesPreprocessor: {
+			variableName: '__ER__',
+			stripPrefix: 'test/er/'
+		},
 		action: 'run'
 	};
+
+	if( fs.existsSync( 'test/er/' ) ) {
+        karmaConfig.files.push( 'test/er/*.json' );
+	}
+
+	if( isRecordingResults ) {
+		karmaConfig.reporters = ['json-dumper'];
+	}
 
 	for( var key in config ) {
 		if ( key === 'files' ) {
@@ -68,6 +92,12 @@ var test = function( config ) {
 				} else if ( typeof file === 'object' ) {
 					karmaConfig.files.push( file );
 				}
+			}
+
+		} else if ( key == 'preprocessors' ) {
+
+			for( var fKey in config.preprocessors ) {
+				karmaConfig.preprocessors[fKey] = config.preprocessors[fKey];
 			}
 
 		} else {
