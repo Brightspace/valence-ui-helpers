@@ -97,13 +97,14 @@ var d2l = {
 
 		differs : {
 
-			diffDefaultStyle: function( classStyledElement ) {
+			diffDefaultStyle: function( classStyledElement, pseudoElt ) {
 				var defaultElement = classStyledElement.cloneNode(true);
 				defaultElement.className="";
 				classStyledElement.parentNode.appendChild( defaultElement );
 
-		    	var actualComputed = window.getComputedStyle( classStyledElement );
-				var defaultComputed = window.getComputedStyle( defaultElement );
+		    	var actualComputed = window.getComputedStyle( classStyledElement, pseudoElt || null );
+
+				var defaultComputed = window.getComputedStyle( defaultElement, pseudoElt || null );
 
 		        if (!actualComputed || !defaultComputed) {
 					classStyledElement.parentNode.removeChild( defaultElement );
