@@ -67,8 +67,8 @@ var test = function( config, isRecordingResults ) {
 
 	if( fs.existsSync( 'test/er/' ) ) {
 		if( fs.readdirSync( 'test/er/' ).length != 0 ) {
-        	karmaConfig.files.push( 'test/er/*.json' );
-    	}
+			karmaConfig.files.push( 'test/er/*.json' );
+		}
 	} else {
 		fs.mkdirSync( 'test/er/' );
 	}
