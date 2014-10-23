@@ -272,6 +272,18 @@ var d2l = {
 				return d2l.jasmine._private.createCompareStyle( 'box-shadow' );
 			},
 
+			toHaveClassName: function() {
+				return {
+					compare: function( elem, expected ) {
+						var hasClass = ( " " + elem.className + " " ).indexOf( " "+expected+" " ) > -1;
+						return {
+							pass: hasClass,
+							message: 'Expected element to have class "' + expected + '"" but it did not.'
+						};
+					}
+				};
+			},
+
 			toHaveColor: function() {
 				return d2l.jasmine._private.createCompareStyle( 'color' );
 			},
