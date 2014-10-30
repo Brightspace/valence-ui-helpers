@@ -20,8 +20,10 @@ var makeCss = function( source, target, opts ) {
 		autoprefixer = require( 'gulp-autoprefixer' ),
 		rename = require('gulp-rename');
 
+	var paths = ( opts && opts.paths ) ? opts.paths : [ './' ];
+
 	return vfs.src( source )
-		.pipe( less() )
+		.pipe( less( { paths: paths } ) )
 		.pipe( autoprefixer( prefixOpts ) )
 		.pipe( csslint( ( opts && opts.lintOpts ) ? opts.lintOpts : '' ) )
 		.pipe( csslint.reporter() )
