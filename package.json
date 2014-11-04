@@ -29,7 +29,7 @@
     "karma-script-launcher": "^0.1.0",
     "q": "^1.0.1",
     "vinyl-fs": "^0.3.7",
-    "vui-jasmine-dom-matchers": "0.0.3"
+    "vui-jasmine-dom-matchers": "0.0.4"
   },
   "keywords": [
     "d2l",
