@@ -49,7 +49,7 @@ var test = function( config, isRecordingResults ) {
 	var karmaConfig = {
 		configFile: 'node_modules/vui-helpers/karma.conf.js',
 		files: [
-			'node_modules/vui-helpers/jasmine/matchers.js'
+			'node_modules/vui-helpers/node_modules/vui-jasmine-dom-matchers/matchers.js'
 		],
 		preprocessors: {
 			'node_modules/vui-helpers/jasmine/matchers.js' : ['directives'],
