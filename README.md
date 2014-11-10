@@ -1,4 +1,6 @@
-#VUI Helpers [![Build Status](https://travis-ci.org/Desire2Learn-Valence/valence-ui-helpers.svg?branch=master)](https://travis-ci.org/Desire2Learn-Valence/valence-ui-helpers)
+#VUI Helpers
+[![NPM version][npm-image]][npm-url]
+[![Build status][ci-image]][ci-url]
 
 This project contains GULP helper scripts for building VUI components.
 
@@ -81,10 +83,22 @@ gulp.task( 'test', function () {
 } );
 ```
 
-The test helper configures the Karma test runner to use PhantomJS, coverage reporters, and Jasmine. It also includes custom Jasmine matchers that may be used in your specs. A config object must be provided to the test helper to specify the files/patterns for the test. Other Karma config properties may be provided, for instance to include files for coverage via the preprocessor property.
+The test helper configures the Karma test runner to use PhantomJS, coverage
+reporters, and Jasmine. It also includes custom Jasmine matchers that may be
+used in your specs. A config object must be provided to the test helper to
+specify the files/patterns for the test. Other Karma config properties may be
+provided, for instance to include files for coverage via the preprocessor
+property.
 
 ## Contributiing
 
 ### Code Style
 
-This repository is configured with [EditorConfig](http://editorconfig.org) rules and contributions should make use of them. See the valence-ui [Code Style wiki page](https://github.com/Desire2Learn-Valence/valence-ui-helpers/wiki/Code-Style) for details.
+This repository is configured with [EditorConfig](http://editorconfig.org) rules
+and contributions should make use of them. See the valence-ui [Code Style wiki
+page](https://github.com/Brightspace/valence-ui-helpers/wiki/Code-Style) for details.
+
+[npm-url]: https://npmjs.org/package/vui-helpers
+[npm-image]: https://badge.fury.io/js/vui-helpers.png
+[ci-image]: https://travis-ci.org/Brightspace/valence-ui-helpers.svg?branch=master
+[ci-url]: https://travis-ci.org/Brightspace/valence-ui-helpers
