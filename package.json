@@ -1,7 +1,7 @@
 {
   "name": "vui-helpers",
   "description": "Gulp helper scripts for building VUI components",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "repository": {
