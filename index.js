@@ -49,36 +49,10 @@ var test = function( config, isRecordingResults ) {
 	var karmaConfig = {
 		configFile: 'node_modules/vui-helpers/karma.conf.js',
 		files: [
-			'node_modules/vui-helpers/jasmine/matchers.js',
 			'node_modules/vui-helpers/node_modules/vui-jasmine-dom-matchers/matchers.js'
 		],
-		preprocessors: {
-			'node_modules/vui-helpers/jasmine/matchers.js' : ['directives'],
-			'test/er/*.json' : ['json_fixtures']
-		},
-		directivesPreprocess: {
-			flags: {
-				'js' : { ER_GEN: isRecordingResults == true }
-			}
-		},
-		jsonFixturesPreprocessor: {
-			variableName: '__ER__',
-			stripPrefix: 'test/er/'
-		},
 		action: 'run'
 	};
-
-	if( fs.existsSync( 'test/er/' ) ) {
-		if( fs.readdirSync( 'test/er/' ).length != 0 ) {
-			karmaConfig.files.push( 'test/er/*.json' );
-		}
-	} else {
-		fs.mkdirSync( 'test/er/' );
-	}
-
-	if( isRecordingResults ) {
-		karmaConfig.reporters = ['json-dumper'];
-	}
 
 	for( var key in config ) {
 		if ( key === 'files' ) {
