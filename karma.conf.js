@@ -15,7 +15,6 @@ module.exports = function( config ) {
 			suite: 'unit'
 		},
 		plugins : [
-			require('./json-dumper.js'),
 			'karma-chrome-launcher',
 			'karma-coverage',
 			'karma-directives-preprocessor',
