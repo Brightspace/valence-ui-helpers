@@ -77,6 +77,10 @@ var test = function( config, isRecordingResults ) {
 
 		} else if ( key == 'preprocessors' ) {
 
+			if ( karmaConfig.preprocessors === undefined ) {
+				karmaConfig.preprocessors = {};
+			}
+
 			for( var fKey in config.preprocessors ) {
 				karmaConfig.preprocessors[fKey] = config.preprocessors[fKey];
 			}
