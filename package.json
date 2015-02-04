@@ -1,7 +1,7 @@
 {
   "name": "vui-helpers",
   "description": "Gulp helper scripts for building VUI components",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "repository": {
@@ -29,7 +29,7 @@
     "karma-script-launcher": "^0.1.0",
     "q": "^1.0.1",
     "vinyl-fs": "^0.3.7",
-    "vui-jasmine-dom-matchers": "0.0.4"
+    "vui-jasmine-dom-matchers": "^0.0.6"
   },
   "keywords": [
     "d2l",
