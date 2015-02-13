@@ -1,4 +1,4 @@
-#VUI Helpers
+# vui-helpers
 [![NPM version][npm-image]][npm-url]
 [![Build status][ci-image]][ci-url]
 
@@ -94,11 +94,9 @@ property.
 
 ### Code Style
 
-This repository is configured with [EditorConfig](http://editorconfig.org) rules
-and contributions should make use of them. See the valence-ui [Code Style wiki
-page](https://github.com/Brightspace/valence-ui-helpers/wiki/Code-Style) for details.
+This repository is configured with [EditorConfig](http://editorconfig.org) rules and contributions should make use of them. See the [VUI Best Practices & Style Guide](https://github.com/Brightspace/valence-ui-docs/wiki/Best-Practices-&-Style-Guide) for more information.
 
 [npm-url]: https://npmjs.org/package/vui-helpers
-[npm-image]: https://badge.fury.io/js/vui-helpers.png
+[npm-image]: https://img.shields.io/npm/v/vui-helpers.svg
 [ci-image]: https://travis-ci.org/Brightspace/valence-ui-helpers.svg?branch=master
 [ci-url]: https://travis-ci.org/Brightspace/valence-ui-helpers
