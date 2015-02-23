@@ -1,8 +1,18 @@
+# [DEPRECATED] vui-helpers
+
+This project is deprecated! We strongly recommend using other modules to perform the gulp activities packaged here.
+
+* Validation with with [Lint](https://www.npmjs.org/package/gulp-csslint)
+* Transpiling with [Less](https://www.npmjs.org/package/gulp-less)
+* Auto-Prifixing with [autoprefixer](https://www.npmjs.org/package/autoprefixer)
+* Valence UI Testing with [Karma JSON Log Reporter](https://www.npmjs.com/package/vui-karma-json-log-reporter), [Karma JSON Log Configurer](https://www.npmjs.com/package/vui-karma-jasmine-tester), and [Jasmine DOM Matchers](https://www.npmjs.com/package/vui-jasmine-dom-matchers).
+
+_Previous README reproduced below_
+
 # vui-helpers
+
 [![NPM version][npm-image]][npm-url]
 [![Build status][ci-image]][ci-url]
-
-This project contains GULP helper scripts for building VUI components.
 
 ##Usage
 
